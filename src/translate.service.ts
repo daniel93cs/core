@@ -40,6 +40,8 @@ declare interface Window {
 }
 declare const window: Window;
 
+let global_store: any = null;
+
 @Injectable()
 export class TranslateService {
     private loadingTranslations: Observable<any>;
@@ -166,6 +168,8 @@ export class TranslateService {
                 public missingTranslationHandler: MissingTranslationHandler,
                 @Inject(USE_DEFAULT_LANG) private useDefaultLang: boolean = true,
                 @Inject(USE_STORE) private isolate: boolean = false) {
+        global_store = global_store || store;
+        this.store = global_store;
     }
 
     /**
